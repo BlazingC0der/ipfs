@@ -1,12 +1,10 @@
-const express = require('express');
-const web3 = require('web3.storage')
-const Web3Storage = web3.Web3Storage
-const getFilesFromPath = web3.getFilesFromPath
-const pg = require('pg');
-const axios = require('axios');
-const fs = require('fs');
-const formidable = require('formidable');
-const randomstring = require('randomstring');
+import express from 'express'
+import { Web3Storage, getFilesFromPath } from 'web3.storage'
+import pg from 'pg'
+import axios from 'axios'
+import fs, { stat } from 'fs'
+import formidable from 'formidable'
+import randomstring from 'randomstring'
 
 const app = express()
 const keys = [] // array to store api keys
