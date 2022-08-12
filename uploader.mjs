@@ -1,7 +1,7 @@
 import { Web3Storage, getFilesFromPath } from 'web3.storage'
 import 'dotenv/config'
 import DbGen from './pg.mjs'
-import axios from 'axios';
+import axios from 'axios'
 
 const DbClient = DbGen()
 
@@ -23,15 +23,16 @@ const update = (status, CbUrl, url, cid = null, err = null) => {
             }
         })
     } else {
+        const IpfsLink = `https://dweb.link/ipfs/${cid}`
         DbClient.query(`UPDATE jobs
-                    SET status=$1
-                    WHERE file_url=$2 RETURNING*`, [status, url], (err, result) => {
+                    SET status=$1, ipfs_url=$2
+                    WHERE file_url=$3 RETURNING*`, [status, IpfsLink, url], (err, result) => {
             if (err) {
                 console.log(err)
                 return false
             } else {
                 console.log(result.rows)
-                axios.post(CbUrl, { status, url: `https://dweb.link/ipfs/${cid}` })
+                axios.post(CbUrl, { status, url: IpfsLink, error: err })
                 return true
             }
         })
@@ -41,7 +42,7 @@ const update = (status, CbUrl, url, cid = null, err = null) => {
 const uploader = async (guid, name, cb, link) => {
     const file = await getFilesFromPath(`./pdfs/${guid}.pdf`)
     const Web3Client = new Web3Storage({ token: process.env.Web3Token })
-    const cid = await Web3Client.put(file, { name }).catch((err) => {
+    const cid = await Web3Client.put(file, { name: name }).catch((err) => {
         return update("failed", cb, link, null, err)
     })
     return update("uploaded", cb, link, cid)
