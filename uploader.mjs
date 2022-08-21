@@ -3,17 +3,7 @@ import "dotenv/config"
 import DbGen from "./pg.mjs"
 import axios from "axios"
 import GetFile from "./FileGetter.mjs"
-import winston from "winston"
-
-const logger = winston.createLogger({
-    level: "error",
-    format: winston.format.json(),
-    defaultMeta: { service: "user-service" },
-    transports: [
-        // - Write all logs with importance level of `error` or less to `error.log`
-        new winston.transports.File({ filename: "error.log", level: "error" }),
-    ],
-})
+import logger from "./logger.mjs"
 
 const DbClient = DbGen()
 // connecting to pg sever
@@ -21,19 +11,18 @@ DbClient.connect()
 DbClient.on("connect", () =>
     console.log("connection with DB established through port 5432")
 )
-// @param params:job id, error msg and updated no. of retries in case upload fails otherwise id,status, callback url and cid for uploaded fiel is passed
-const update = (...params) => {
-    console.log("updating...")
-    if (params.length === 3) {
-        let id = params[0]
-        let err = params[1]
-        let retries = params[2]
+// @param params error msg and updated no. of retries in case upload fails otherwise id,status, callback url and cid for uploaded fiel is passed
+const update = (id, ...params) => {
+    if (params.length === 2) {
+        let err = params[0]
+        let retries = params[1]
+        let status = retries === 0 ? "failed" : "pending upload"
         //* updating error msg and decremnting no. of retries in the DB
         DbClient.query(
             `UPDATE jobs
-                    SET retries=$1, error=$2
-                    WHERE id=$3 RETURNING*`,
-            [retries, err, id],
+                    SET retries=$1, error=$2, status=$3
+                    WHERE id=$4 RETURNING*`,
+            [retries, err, status, id],
             (err, result) => {
                 if (err) {
                     logger.error(err)
@@ -46,10 +35,9 @@ const update = (...params) => {
         return false
     } else {
         let flag = true
-        let id = params[0]
-        let status = params[1]
-        let cb = params[2]
-        let cid = params[3]
+        let status = params[0]
+        let cb = params[1]
+        let cid = params[2]
         const IpfsLink = `https://dweb.link/ipfs/${cid}` // url to access file uploaded to ipfs
         //* updating status to uploaded and enetring ipfs url into DB
         DbClient.query(
@@ -79,6 +67,7 @@ const update = (...params) => {
 }
 
 const uploader = async (guid, name, cb, id, retries) => {
+    console.log("uploading....")
     const file = await GetFile(`./pdfs/${guid}.pdf`) // getting file from  locla storage
     const Web3Client = new Web3Storage({ token: process.env.Web3Token }) // creating a web.storage client instance
     try {
