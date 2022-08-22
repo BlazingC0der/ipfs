@@ -4,6 +4,7 @@ import DbGen from "./pg.mjs"
 import axios from "axios"
 import GetFile from "./FileGetter.mjs"
 import logger from "./logger.mjs"
+import "dotenv/config"
 
 const DbClient = DbGen()
 // connecting to pg sever
@@ -68,7 +69,7 @@ const update = (id, ...params) => {
 
 const uploader = async (guid, name, cb, id, retries) => {
     console.log("uploading....")
-    const file = await GetFile(`./pdfs/${guid}.pdf`) // getting file from  locla storage
+    const file = await GetFile(`${process.env.FilePath}${guid}.pdf`) // getting file from  locla storage
     const Web3Client = new Web3Storage({ token: process.env.Web3Token }) // creating a web.storage client instance
     try {
         //* uploading to ipfs using web3.storage pinnning service

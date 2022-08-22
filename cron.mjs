@@ -91,7 +91,7 @@ const IpfsUpload = async (tuples) => {
                 logger.error(error)
                 throw error
             } finally {
-                fs.unlink(`./pdfs/${row.guid}.pdf`, (err) => {
+                fs.unlink(`${process.env.FilePath}${row.guid}.pdf`, (err) => {
                     console.log("deleting...")
                     err ? logger.error(err) : console.log("deleted!")
                 })

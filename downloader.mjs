@@ -2,6 +2,7 @@ import axios from "axios"
 import fs from "fs"
 import DbGen from "./pg.mjs"
 import logger from "./logger.mjs"
+import "dotenv/config"
 
 const DbClient = DbGen()
 // connecting to pg sever
@@ -53,7 +54,7 @@ const downloader = async (id, guid, url, retries) => {
         let res = await axios.get(url, { responseType: "blob" })
         console.log(res)
         //* temporarily storing file locally
-        fs.writeFile(`./pdfs/${guid}.pdf`, res.data, (err) => {
+        fs.writeFile(`${process.env.FilePath}${guid}.pdf`, res.data, (err) => {
             if (err) {
                 logger.error(err)
                 console.log(err)
