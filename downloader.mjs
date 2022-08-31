@@ -51,7 +51,7 @@ const downloader = async (id, guid, url, retries) => {
     let downloaded = true
     try {
         //* downloading file from s3 as buffer
-        let res = await axios.get(url, { responseType: "blob" })
+        let res = await axios.get(url, { responseType: "arraybuffer" })
         console.log(res)
         //* temporarily storing file locally
         fs.writeFile(`${process.env.FilePath}${guid}.pdf`, res.data, (err) => {
