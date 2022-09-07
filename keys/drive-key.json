@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "velvety-being-286816",
+  "private_key_id": "d8eb73a4e0d5fc3ad97a899ca9a8d780e7b46ca5",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC6OfKgzcx1Sinh\nrLyIbKF7dmrHXza+mX52jAsc1a2bBhRHKqhH6ZrQplj2PcdM7bxyj5JaM4WyaLjY\nvmaabdnjiebPxtkYN3YTZgx8gckip7aqq3XEgpNCbuHj5VHf5quGdXXzmw/xYBIG\n5+wzn2yN95AD3WmX/zRdTNYx+GGAiV7x3JAzgH1sJwgcsDwm+IcOL4CjAticEIbJ\nTzCWl7ME59Pj9SIYl/Wf76OqtXNULppFm5azq2yfaYUYOGHOzweYwZBWUaJmfj/I\nXy7FDTnVrwFeITKqKJ8SvMPZ99oDy0ErdwHtgwOAmm3BHIHvmt1P1QeuV+cc8ZAm\nXnj7MM4jAgMBAAECggEAA6P0+ZXE84UaUxvplSPsWXJdtgJa37D7s4R9ytBvJ68M\nDCBqC3DrQD0Xoh44vstmCNeX+JjTjeBLlzuRA5rAJXHhYIaY12SU7rbDc5IbLGZ9\nOyEKe3tWmSlUDtVLVoZUjq8wYS1wcrtJDbMzHMvZbVX4l8DnJyg1ejvnweHbhrUq\nCMb5pamn+AI0RZANEKPTVglGjbZVs6RiY61gCR9xTnePOoIJwMt1v7vcAMuoWKv/\n5hPHy8Me3dMOQkxbRRrBbITO+ZFL0hWXx/wzNZVMxD44+gs6fwqV+OcqE24FzTN2\nzx0MR8Ss41SUaXk8QrydHE5abjJZlrWA98wb+Q7QwQKBgQDw0c+YCPv1SHFntzEl\nSWB1pOv+529g7xq+vxeWHOtVm9UVfxlWm1WIwquGq4PkQ+xk/aBrKEYJ0RwUpiae\nV1SDezxD7cQqWrpwuKKptWCy1lVFl2p/epi9YCs4BQ8yml9CQE0GfGR/owgo6rku\njzxUPIxM72IreltclBI5EKPqwwKBgQDF9yWteZ3ULyQ5gUyUG1hIvig6kYtA7foA\nh9AH+CP8j91z4ODIyWT2WQhngaLb7abB2Ma8KsrIwXfUm4ooIUJGxvulm0x++p7m\nVxtJqnKtwvnx83aKxKw4+41mfCdZ5gKgkKimmewLcyiJ7wlKb6xD4HfJMTFx84aq\nKIA30CuZIQKBgEf7HqbeAJm3VpZermTrwtZHPncJrEP4FDFxotYuvLTxCEcNn4BA\nm9duAKEXQSwIlW82VC3TcuPaSh9t7lsj1VIbks7nEdxrFBE/TveVDFtIL2LGuIF0\nHpV0Wla7RGimtdRyrdNDeTKhg33fcwyUqb6v/mu8ncZLI2XPqIbAD47LAoGANPCw\n/MFHOdUZhN9VEU52v41KyM7fRI/fiYDIWzk6tnHqsPB0bH2fKFoK61M5sELPk4tb\nKjrvW9yRJSQrQCwUw0S3S0RKorJ3B/ZHb93LKTi5CsEm9FlADUUIPV36UAo4raPB\n1jvXagBz2N85xtQyZzyCDCXBqU2Mt7h5AXQEFMECgYAoo39AJ8qBmTjjUj8xj5mo\nSRKocyNtr/0phOBeKABTwln/ahn0xu0a7aH3TfrEdpT+p4gPJt0MiVymXTLr1BSv\nFpUqXwdUW2hY6YEN7mRiU0JCZgGX/P73rPPpw4XCMCJyVCM4iD4tKDucUiGfPBxO\nltp6zWLX4LGj7l5skdrj3g==\n-----END PRIVATE KEY-----\n",
+  "client_email": "gdrive@velvety-being-286816.iam.gserviceaccount.com",
+  "client_id": "113262273279331267488",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/gdrive%40velvety-being-286816.iam.gserviceaccount.com"
+}

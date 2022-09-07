@@ -1,17 +1,14 @@
 import axios from "axios"
 import fs from "fs"
-import DbGen from "./pg.mjs"
-import logger from "./logger.mjs"
+import DbGen from "../utils/pg.mjs"
+import logger from "../loggers/logger.mjs"
 import "dotenv/config"
 
 const DbClient = DbGen()
 // connecting to pg sever
 DbClient.connect()
-DbClient.on("connect", () =>
-    console.log("connection with DB established through port 5432")
-)
 
-const update = (id, err, retries) => {
+const update = (id, err, retries, cb) => {
     // updating error and decremnting retries
     if (retries === 0) {
         DbClient.query(
@@ -24,6 +21,17 @@ const update = (id, err, retries) => {
                     logger.error(err)
                     console.log(err)
                 } else {
+                    try {
+                        //* posting feedback to callback api to inform about failure to upload the file to ipfs
+                        axios.post(cb, {
+                            status: "failed",
+                            url: null,
+                            error: "reached request limit!",
+                        })
+                    } catch (error) {
+                        logger.error(error)
+                        throw error
+                    }
                     console.log(result.rows)
                 }
             }
@@ -46,8 +54,8 @@ const update = (id, err, retries) => {
     }
 }
 
-const downloader = async (id, guid, url, retries) => {
-    console.log("downloading...")
+const downloader = async (id, guid, url, retries, cb) => {
+    console.log("downloading resume...")
     let downloaded = true
     try {
         //* downloading file from s3 as buffer
@@ -59,7 +67,7 @@ const downloader = async (id, guid, url, retries) => {
                 logger.error(err)
                 console.log(err)
                 //* decremting retries in DB for failure to write file to lcoal directory
-                update(id, err, retries - 1)
+                update(id, err, retries - 1, cb)
                 downloaded = false
                 throw err
             }
@@ -67,7 +75,7 @@ const downloader = async (id, guid, url, retries) => {
     } catch (err) {
         logger.error(err)
         //* decremting retries in DB for failure to download file from s3
-        update(id, err, retries - 1)
+        update(id, err, retries - 1, cb)
         throw err
     }
     return downloaded

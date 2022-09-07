@@ -1,6 +1,6 @@
 import * as Sentry from "@sentry/node"
 import * as Tracing from "@sentry/tracing"
-import CronJob from "./cron.mjs"
+import CronJob from "../cron.mjs"
 
 Sentry.init({
     dsn: "https://decd745fa19c4f87a38b06c29bdc8910@o1356895.ingest.sentry.io/6642762",
